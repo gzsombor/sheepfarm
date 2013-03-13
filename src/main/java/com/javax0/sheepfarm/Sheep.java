@@ -9,7 +9,22 @@ public class Sheep implements DomesticatedAnimal {
 	private Herd<Sheep> herd;
 	private Wool wool = new Wool();
 	private Mouth mouth = new Mouth();
+	private SheepBehaviour behaviour = new Lamb(this);
 
+	private Gender gender;
+	
+	public static enum Gender { 
+		MALE, FEMALE;
+	}
+	
+	public Sheep(Gender g) {
+		this.gender = g; 
+	}
+	
+	public Gender getGender() {
+		return gender;
+	}
+	
 	public Mouth getMouth() {
 		return mouth;
 	}
@@ -31,6 +46,7 @@ public class Sheep implements DomesticatedAnimal {
 	}
 
 	protected void cloneTo(Sheep other) {
+		other.gender = this.gender;
 		other.weight = this.weight;
 		other.wool.color = this.wool.color;
 		other.wool.length = this.wool.length;
@@ -64,4 +80,13 @@ public class Sheep implements DomesticatedAnimal {
 			return woolPack;
 		}
 	}
+
+	void changeBehaviour(SheepBehaviour newBehaviour) {
+		this.behaviour = newBehaviour;
+	}
+	
+	public SheepBehaviour getBehaviour() {
+		return behaviour;
+	}
+	
 }
